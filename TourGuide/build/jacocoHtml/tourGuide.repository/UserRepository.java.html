@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TourGuide</a> &gt; <a href="index.source.html" class="el_package">tourGuide.repository</a> &gt; <span class="el_source">UserRepository.java</span></div><h1>UserRepository.java</h1><pre class="source lang-java linenums">package tourGuide.repository;
+
+import gpsUtil.location.Location;
+import gpsUtil.location.VisitedLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tourGuide.helper.InternalTestHelper;
+import tourGuide.domain.user.User;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
+import java.util.stream.IntStream;
+
+/**********************************************************************************
+ *
+ * Methods Below: For Internal Testing
+ *
+ **********************************************************************************/
+
+<span class="fc" id="L21">public class UserRepository {</span>
+
+<span class="fc" id="L23">    private Logger logger = LoggerFactory.getLogger(UserRepository.class);</span>
+    private static final String tripPricerApiKey = &quot;test-server-api-key&quot;;
+    // Database connection will be used for external users, but for testing purposes internal users are provided and stored in memory
+<span class="fc" id="L26">    private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
+
+    public void initializeInternalUsers() {
+<span class="fc" id="L29">        IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
+<span class="fc" id="L30">            String userName = &quot;internalUser&quot; + i;</span>
+<span class="fc" id="L31">            String phone = &quot;000&quot;;</span>
+<span class="fc" id="L32">            String email = userName + &quot;@tourGuide.com&quot;;</span>
+<span class="fc" id="L33">            User user = new User(UUID.randomUUID(), userName, phone, email);</span>
+<span class="fc" id="L34">            generateUserLocationHistory(user);</span>
+
+<span class="fc" id="L36">            internalUserMap.put(userName, user);</span>
+<span class="fc" id="L37">        });</span>
+<span class="fc" id="L38">        logger.debug(&quot;Created &quot; + InternalTestHelper.getInternalUserNumber() + &quot; internal test users.&quot;);</span>
+<span class="fc" id="L39">    }</span>
+
+    private void generateUserLocationHistory(User user) {
+<span class="fc" id="L42">        IntStream.range(0, 3).forEach(i-&gt; {</span>
+<span class="fc" id="L43">            user.addToVisitedLocations(new VisitedLocation(user.getUserId(), new Location(generateRandomLatitude(), generateRandomLongitude()), getRandomTime()));</span>
+<span class="fc" id="L44">        });</span>
+<span class="fc" id="L45">    }</span>
+
+    private double generateRandomLongitude() {
+<span class="fc" id="L48">        double leftLimit = -180;</span>
+<span class="fc" id="L49">        double rightLimit = 180;</span>
+<span class="fc" id="L50">        return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);</span>
+    }
+
+    private double generateRandomLatitude() {
+<span class="fc" id="L54">        double leftLimit = -85.05112878;</span>
+<span class="fc" id="L55">        double rightLimit = 85.05112878;</span>
+<span class="fc" id="L56">        return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);</span>
+    }
+
+    private Date getRandomTime() {
+<span class="fc" id="L60">        LocalDateTime localDateTime = LocalDateTime.now().minusDays(new Random().nextInt(30));</span>
+<span class="fc" id="L61">        return Date.from(localDateTime.toInstant(ZoneOffset.UTC));</span>
+    }
+
+    public Map&lt;String, User&gt; getInternalUserMap() {
+<span class="fc" id="L65">        return internalUserMap;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

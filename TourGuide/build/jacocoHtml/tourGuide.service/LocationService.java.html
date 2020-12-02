@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TourGuide</a> &gt; <a href="index.source.html" class="el_package">tourGuide.service</a> &gt; <span class="el_source">LocationService.java</span></div><h1>LocationService.java</h1><pre class="source lang-java linenums">package tourGuide.service;
+
+import gpsUtil.GpsUtil;
+import gpsUtil.location.Attraction;
+import gpsUtil.location.Location;
+import gpsUtil.location.VisitedLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import tourGuide.domain.NearbyAttraction;
+import tourGuide.domain.user.User;
+import tourGuide.tracker.Tracker;
+
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Service
+public class LocationService {
+
+<span class="fc" id="L23">    private final Logger logger = LoggerFactory.getLogger(LocationService.class);</span>
+
+    private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
+<span class="fc" id="L26">    private int attractionProximityRange = 200;</span>
+<span class="fc" id="L27">    private int numberOfClosestAttractions = 5;</span>
+    private GpsUtil gpsUtil;
+
+    //TODO: Do I need RewardsService, since I'll be cutting it away, or can I just add RewardsCentral to the GPS microservice?
+    //Method call to http REST call instead
+    //Endpoint rewards/
+    //Call external services this way too
+    private RewardsService rewardsService;
+    private UserService userService;
+
+    public final Tracker tracker;
+
+<span class="fc" id="L39">    ExecutorService executorService = Executors.newFixedThreadPool(2000);</span>
+
+<span class="fc" id="L41">    public LocationService(RewardsService rewardsService, UserService userService) {</span>
+<span class="fc" id="L42">        gpsUtil = new GpsUtil();</span>
+<span class="fc" id="L43">        this.rewardsService = rewardsService;</span>
+<span class="fc" id="L44">        this.userService = userService;</span>
+
+<span class="fc" id="L46">        tracker = new Tracker(userService ,this);</span>
+<span class="fc" id="L47">        addShutDownHook();</span>
+<span class="fc" id="L48">    }</span>
+
+    public VisitedLocation getUserLocation(User user) {
+<span class="nc" id="L51">        VisitedLocation visitedLocation = null;</span>
+        try {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            visitedLocation = (user.getVisitedLocations().size() &gt; 0) ?</span>
+<span class="nc" id="L54">                    user.getLastVisitedLocation() :</span>
+<span class="nc" id="L55">                    trackUserLocation(user);</span>
+<span class="nc" id="L56">        } catch (ExecutionException | InterruptedException e) {</span>
+<span class="nc" id="L57">            logger.error(&quot;Unable to get user location for UUID: &quot; + user.getUserId().toString(), e);</span>
+//            e.printStackTrace();
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        return visitedLocation;</span>
+    }
+
+//    public VisitedLocation trackUserLocation(User user) {
+//        VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+//        user.addToVisitedLocations(visitedLocation);
+//        rewardsService.calculateRewards(user);
+//        return visitedLocation;
+//    }
+
+    //Concurrent solution for above trackUserLocation() method
+    public VisitedLocation trackUserLocation(User user) throws ExecutionException, InterruptedException {
+<span class="fc" id="L72">        long startTime = System.currentTimeMillis();</span>
+
+<span class="fc" id="L74">        CompletableFuture&lt;VisitedLocation&gt; completableFuture = CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="fc" id="L75">            return gpsUtil.getUserLocation(user.getUserId());</span>
+        }, executorService).
+<span class="fc" id="L77">                thenApplyAsync(visitedLocation -&gt; {</span>
+<span class="fc" id="L78">                    user.addToVisitedLocations(visitedLocation);</span>
+                    //TODO: maybe break this into a separate method?
+<span class="fc" id="L80">                    rewardsService.calculateRewards(user);</span>
+<span class="fc" id="L81">                    return visitedLocation;</span>
+                });
+
+<span class="fc" id="L84">        logger.debug(&quot;All users tracked in: &quot; + (System.currentTimeMillis() - startTime + &quot; MS&quot;));</span>
+<span class="fc" id="L85">        return completableFuture.get();</span>
+    }
+
+//    public VisitedLocation trackUserLocation(User user) throws ExecutionException, InterruptedException {
+//        long startTime = System.currentTimeMillis();
+//
+//        CompletableFuture&lt;VisitedLocation&gt; completableFuture = CompletableFuture.supplyAsync(() -&gt; {
+//            return gpsUtil.getUserLocation(user.getUserId());
+//        }, executorService).
+//                thenApplyAsync(visitedLocation -&gt; {
+//                    user.addToVisitedLocations(visitedLocation);
+//                    rewardsService.calculateRewards(user);
+//                    return visitedLocation;
+//                });
+//
+//        logger.debug(&quot;All users tracked in: &quot; + (System.currentTimeMillis() - startTime + &quot; MS&quot;));
+//        return completableFuture.get();
+//    }
+
+    public Map&lt;String, Location&gt; getAllUsersLocations() {
+<span class="nc" id="L105">        Map&lt;String, Location&gt; allUsersLocations = new HashMap&lt;String, Location&gt;();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        for (User user : userService.getAllUsers()) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            allUsersLocations.put(user.getUserId().toString(), (user.getVisitedLocations().size() &gt; 0) ?</span>
+<span class="nc" id="L108">            user.getLastVisitedLocation().location : null);</span>
+<span class="nc" id="L109">        }</span>
+<span class="nc" id="L110">        return allUsersLocations;</span>
+    }
+
+    public List&lt;Attraction&gt; getAttractions() {
+<span class="nc" id="L114">        return gpsUtil.getAttractions();</span>
+    }
+
+    public List&lt;NearbyAttraction&gt; getClosestAttractions(VisitedLocation visitedLocation) {
+<span class="nc" id="L118">        List&lt;NearbyAttraction&gt; nearbyAttractions = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L119">        Map&lt;Double, Attraction&gt; attractionsMap = new TreeMap&lt;&gt;();</span>
+
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        for (Attraction attraction : gpsUtil.getAttractions()) {</span>
+<span class="nc" id="L122">            attractionsMap.put(getDistance(attraction, visitedLocation.location), attraction);</span>
+<span class="nc" id="L123">        }</span>
+
+<span class="nc" id="L125">        attractionsMap.forEach((distance, attraction) -&gt; {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            if(nearbyAttractions.size() &lt; numberOfClosestAttractions) {</span>
+<span class="nc" id="L127">                NearbyAttraction nearbyAttraction = new NearbyAttraction();</span>
+<span class="nc" id="L128">                nearbyAttraction.setAttractionName(attraction.attractionName);</span>
+<span class="nc" id="L129">                nearbyAttraction.setAttractionLocation(new Location(attraction.longitude, attraction.latitude));</span>
+<span class="nc" id="L130">                nearbyAttraction.setUserLocation(visitedLocation.location);</span>
+<span class="nc" id="L131">                nearbyAttraction.setAttractionDistance(distance);</span>
+                try {
+<span class="nc" id="L133">                    nearbyAttraction.setAttractionRewardPoints(rewardsService.getRewardPoints(attraction, visitedLocation.userId).get());</span>
+<span class="nc" id="L134">                } catch (InterruptedException | ExecutionException e) {</span>
+<span class="nc" id="L135">                    logger.warn(&quot;Unable to get rewards for UUID: &quot; + visitedLocation.userId.toString(), e);</span>
+<span class="nc" id="L136">                }</span>
+<span class="nc" id="L137">                nearbyAttractions.add(nearbyAttraction);</span>
+            }
+<span class="nc" id="L139">        });</span>
+<span class="nc" id="L140">        return nearbyAttractions;</span>
+    }
+
+//    public List&lt;NearbyAttraction&gt; getClosestAttractions(VisitedLocation visitedLocation) {
+//        List&lt;NearbyAttraction&gt; nearbyAttractions = new ArrayList&lt;&gt;();
+//        Map&lt;Double, Attraction&gt; attractionsMap = new TreeMap&lt;&gt;();
+//
+//        for (Attraction attraction : gpsUtil.getAttractions()) {
+//            attractionsMap.put(getDistance(attraction, visitedLocation.location), attraction);
+//        }
+//
+//        attractionsMap.forEach((distance, attraction) -&gt; {
+//            if(nearbyAttractions.size() &lt; numberOfClosestAttractions) {
+//                NearbyAttraction nearbyAttraction = new NearbyAttraction();
+//                nearbyAttraction.setAttractionName(attraction.attractionName);
+//                nearbyAttraction.setAttractionLocation(new Location(attraction.longitude, attraction.latitude));
+//                nearbyAttraction.setUserLocation(visitedLocation.location);
+//                nearbyAttraction.setAttractionDistance(distance);
+//                nearbyAttraction.setAttractionRewardPoints(rewardsService.getRewardPoints(attraction, visitedLocation.userId));
+//                nearbyAttractions.add(nearbyAttraction);
+//            }
+//        });
+//        return nearbyAttractions;
+//    }
+
+    public List&lt;Attraction&gt; getNearByAttractions(VisitedLocation visitedLocation) {
+<span class="nc" id="L166">        List&lt;Attraction&gt; nearbyAttractions = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for(Attraction attraction : gpsUtil.getAttractions()) {</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            if(isWithinAttractionProximity(attraction, visitedLocation.location)) {</span>
+<span class="nc" id="L169">                nearbyAttractions.add(attraction);</span>
+            }
+<span class="nc" id="L171">        }</span>
+<span class="nc" id="L172">        return nearbyAttractions;</span>
+    }
+
+    public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        return getDistance(attraction, location) &gt; attractionProximityRange ? false : true;</span>
+    }
+
+    public double getDistance(Location loc1, Location loc2) {
+<span class="nc" id="L180">        double lat1 = Math.toRadians(loc1.latitude);</span>
+<span class="nc" id="L181">        double lon1 = Math.toRadians(loc1.longitude);</span>
+<span class="nc" id="L182">        double lat2 = Math.toRadians(loc2.latitude);</span>
+<span class="nc" id="L183">        double lon2 = Math.toRadians(loc2.longitude);</span>
+
+<span class="nc" id="L185">        double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)</span>
+<span class="nc" id="L186">                + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));</span>
+
+<span class="nc" id="L188">        double nauticalMiles = 60 * Math.toDegrees(angle);</span>
+<span class="nc" id="L189">        double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;</span>
+<span class="nc" id="L190">        return statuteMiles;</span>
+    }
+
+        private void addShutDownHook() {
+<span class="fc" id="L194">        Runtime.getRuntime().addShutdownHook(new Thread() {</span>
+            public void run() {
+<span class="fc" id="L196">                tracker.stopTracking();</span>
+<span class="fc" id="L197">            }</span>
+        });
+<span class="fc" id="L199">	}</span>
+
+    //TODO: Add get nearAttraction()?
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
