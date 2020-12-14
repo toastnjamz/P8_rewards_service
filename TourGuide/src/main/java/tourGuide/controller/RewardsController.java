@@ -29,8 +29,9 @@ public class RewardsController {
     }
 
     @RequestMapping("/trip-deals")
-    public String getTripDeals(@RequestParam String tripPricerApiKey, String userID, String numberOfAdults, String numberOfChildren,
-                               String tripDuration, String cumulativeRewardPoints) {
+    public String getTripDeals(@RequestParam String tripPricerApiKey, @RequestParam String userID, @RequestParam String numberOfAdults,
+                               @RequestParam String numberOfChildren, @RequestParam String tripDuration,
+                               @RequestParam String cumulativeRewardPoints) {
         List<Provider> providers = rewardsService.getTripDeals(tripPricerApiKey, UUID.fromString(userID),
                 Integer.parseInt(numberOfAdults), Integer.parseInt(numberOfChildren), Integer.parseInt(tripDuration),
                 Integer.parseInt(cumulativeRewardPoints));
