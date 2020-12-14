@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f551d1b-fd47-43d6-82a3-ef53dc14785d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/configuration/RewardsConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/configuration/RewardsConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
