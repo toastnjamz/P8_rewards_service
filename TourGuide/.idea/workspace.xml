@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f551d1b-fd47-43d6-82a3-ef53dc14785d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/configuration/RewardsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/configuration/RewardsConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/controller/RewardsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/controller/RewardsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/RewardsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/RewardsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,10 +144,10 @@
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state x="467" y="358" key="#Notifications/0.23.2560.1342@0.23.2560.1342" timestamp="1606883892030" />
-    <state x="630" y="383" key="#com.intellij.ide.util.MemberChooser" timestamp="1607221406153">
+    <state x="630" y="383" key="#com.intellij.ide.util.MemberChooser" timestamp="1608089977099">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
-    <state x="630" y="383" key="#com.intellij.ide.util.MemberChooser/0.23.2560.1342@0.23.2560.1342" timestamp="1607221406153" />
+    <state x="630" y="383" key="#com.intellij.ide.util.MemberChooser/0.23.2560.1342@0.23.2560.1342" timestamp="1608089977099" />
     <state x="820" y="625" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1603943234308">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
@@ -152,26 +164,26 @@
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state x="988" y="403" key="#xdebugger.evaluate/0.23.2560.1342@0.23.2560.1342" timestamp="1603939535303" />
-    <state width="1497" height="241" key="GridCell.Tab.0.bottom" timestamp="1607974602404">
+    <state width="1449" height="241" key="GridCell.Tab.0.bottom" timestamp="1608611088243">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state width="1421" height="255" key="GridCell.Tab.0.bottom/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599641" />
-    <state width="1497" height="241" key="GridCell.Tab.0.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1607974602404" />
-    <state width="1497" height="241" key="GridCell.Tab.0.center" timestamp="1607974602403">
+    <state width="1449" height="241" key="GridCell.Tab.0.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
+    <state width="1449" height="241" key="GridCell.Tab.0.center" timestamp="1608611088243">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state width="1421" height="255" key="GridCell.Tab.0.center/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1497" height="241" key="GridCell.Tab.0.center/0.23.2560.1342@0.23.2560.1342" timestamp="1607974602403" />
-    <state width="1497" height="241" key="GridCell.Tab.0.left" timestamp="1607974602402">
+    <state width="1449" height="241" key="GridCell.Tab.0.center/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
+    <state width="1449" height="241" key="GridCell.Tab.0.left" timestamp="1608611088242">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state width="1421" height="255" key="GridCell.Tab.0.left/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1497" height="241" key="GridCell.Tab.0.left/0.23.2560.1342@0.23.2560.1342" timestamp="1607974602402" />
-    <state width="1497" height="241" key="GridCell.Tab.0.right" timestamp="1607974602403">
+    <state width="1449" height="241" key="GridCell.Tab.0.left/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088242" />
+    <state width="1449" height="241" key="GridCell.Tab.0.right" timestamp="1608611088243">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state width="1421" height="255" key="GridCell.Tab.0.right/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1497" height="241" key="GridCell.Tab.0.right/0.23.2560.1342@0.23.2560.1342" timestamp="1607974602403" />
+    <state width="1449" height="241" key="GridCell.Tab.0.right/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
     <state width="2391" height="224" key="GridCell.Tab.1.bottom" timestamp="1604365645366">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>

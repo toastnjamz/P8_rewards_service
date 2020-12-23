@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rewardCentral.RewardCentral;
+import tourGuide.domain.ProviderListWrapper;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -27,9 +28,10 @@ public class RewardsService {
 		return rewardsCentral.getAttractionRewardPoints(attractionId, userId);
 	}
 
-	public List<Provider> getTripDeals(String tripPricerApiKey, UUID userID, int numberOfAdults, int numberOfChildren,
-									   int tripDuration, int cumulativeRewardPoints) {
-		return tripPricer.getPrice(tripPricerApiKey, userID, numberOfAdults, numberOfChildren, tripDuration, cumulativeRewardPoints);
+	public List<Provider> getTripDeals(String tripPricerApiKey, UUID userId, int numberOfAdults, int numberOfChildren,
+											int tripDuration, int cumulativeRewardPoints) {
+		List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, userId, numberOfAdults, numberOfChildren, tripDuration, cumulativeRewardPoints);
+		return providers;
 	}
 
 }

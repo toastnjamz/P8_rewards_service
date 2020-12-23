@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tourGuide.domain.ProviderListWrapper;
 import tourGuide.service.RewardsService;
 import tripPricer.Provider;
 
@@ -23,20 +24,20 @@ public class RewardsController {
 
     //TODO: Add async solution? Use WebClient?
     @RequestMapping("/reward-points")
-    public String getRewardPoints(@RequestParam String attractionId, @RequestParam String userID) {
+    public int getRewardPoints(@RequestParam String attractionId, @RequestParam String userId) {
         logger.debug("Request made to getRewardPoints");
-        return JsonStream.serialize(rewardsService.getRewardPoints(UUID.fromString(attractionId), UUID.fromString(userID)));
+        return rewardsService.getRewardPoints(UUID.fromString(attractionId), UUID.fromString(userId));
     }
 
     @RequestMapping("/trip-deals")
-    public String getTripDeals(@RequestParam String tripPricerApiKey, @RequestParam String userID, @RequestParam String numberOfAdults,
-                               @RequestParam String numberOfChildren, @RequestParam String tripDuration,
-                               @RequestParam String cumulativeRewardPoints) {
-        List<Provider> providers = rewardsService.getTripDeals(tripPricerApiKey, UUID.fromString(userID),
-                Integer.parseInt(numberOfAdults), Integer.parseInt(numberOfChildren), Integer.parseInt(tripDuration),
-                Integer.parseInt(cumulativeRewardPoints));
+    public ProviderListWrapper getTripDeals(@RequestParam String tripPricerApiKey, @RequestParam UUID userId, @RequestParam int numberOfAdults,
+                                            @RequestParam int numberOfChildren, @RequestParam int tripDuration,
+                                            @RequestParam int cumulativeRewardPoints) {
         logger.debug("Request made to getTripDeals");
-        return JsonStream.serialize(providers);
+        ProviderListWrapper providerListWrapper = new ProviderListWrapper();
+        providerListWrapper.setProviderList(rewardsService.getTripDeals(tripPricerApiKey, userId, numberOfAdults,
+                numberOfChildren, tripDuration, cumulativeRewardPoints));
+        return providerListWrapper;
     }
 
 }
