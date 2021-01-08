@@ -24,9 +24,10 @@ public class RewardsController {
 
     //TODO: Add async solution? Use WebClient?
     @RequestMapping("/reward-points")
-    public int getRewardPoints(@RequestParam String attractionId, @RequestParam String userId) {
+    public Integer getRewardPoints(@RequestParam UUID attractionId, @RequestParam UUID userId) {
         logger.debug("Request made to getRewardPoints");
-        return rewardsService.getRewardPoints(UUID.fromString(attractionId), UUID.fromString(userId));
+        Integer rewardsPoints = new Integer(rewardsService.getRewardPoints(attractionId, userId));
+        return rewardsPoints;
     }
 
     @RequestMapping("/trip-deals")

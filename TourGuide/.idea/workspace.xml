@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f551d1b-fd47-43d6-82a3-ef53dc14785d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/configuration/RewardsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/configuration/RewardsConfiguration.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/controller/RewardsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/controller/RewardsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/RewardsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/RewardsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,10 +141,6 @@
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state x="820" y="625" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.2560.1342@0.23.2560.1342" timestamp="1603943234308" />
-    <state x="505" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600977992639">
-      <screen x="0" y="23" width="2560" height="1342" />
-    </state>
-    <state x="505" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.2560.1342@0.23.2560.1342" timestamp="1600977992639" />
     <state x="650" y="446" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607213799943">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
@@ -164,26 +149,22 @@
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state x="988" y="403" key="#xdebugger.evaluate/0.23.2560.1342@0.23.2560.1342" timestamp="1603939535303" />
-    <state width="1449" height="241" key="GridCell.Tab.0.bottom" timestamp="1608611088243">
+    <state width="1449" height="241" key="GridCell.Tab.0.bottom" timestamp="1610077743917">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
-    <state width="1421" height="255" key="GridCell.Tab.0.bottom/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599641" />
-    <state width="1449" height="241" key="GridCell.Tab.0.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
-    <state width="1449" height="241" key="GridCell.Tab.0.center" timestamp="1608611088243">
+    <state width="1449" height="241" key="GridCell.Tab.0.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1610077743917" />
+    <state width="1449" height="241" key="GridCell.Tab.0.center" timestamp="1610077743915">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
-    <state width="1421" height="255" key="GridCell.Tab.0.center/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1449" height="241" key="GridCell.Tab.0.center/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
-    <state width="1449" height="241" key="GridCell.Tab.0.left" timestamp="1608611088242">
+    <state width="1449" height="241" key="GridCell.Tab.0.center/0.23.2560.1342@0.23.2560.1342" timestamp="1610077743915" />
+    <state width="1449" height="241" key="GridCell.Tab.0.left" timestamp="1610077743914">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
-    <state width="1421" height="255" key="GridCell.Tab.0.left/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1449" height="241" key="GridCell.Tab.0.left/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088242" />
-    <state width="1449" height="241" key="GridCell.Tab.0.right" timestamp="1608611088243">
+    <state width="1449" height="241" key="GridCell.Tab.0.left/0.23.2560.1342@0.23.2560.1342" timestamp="1610077743914" />
+    <state width="1449" height="241" key="GridCell.Tab.0.right" timestamp="1610077743916">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
-    <state width="1421" height="255" key="GridCell.Tab.0.right/0.23.2560.1340@0.23.2560.1340" timestamp="1599874599640" />
-    <state width="1449" height="241" key="GridCell.Tab.0.right/0.23.2560.1342@0.23.2560.1342" timestamp="1608611088243" />
+    <state width="1449" height="241" key="GridCell.Tab.0.right/0.23.2560.1342@0.23.2560.1342" timestamp="1610077743916" />
     <state width="2391" height="224" key="GridCell.Tab.1.bottom" timestamp="1604365645366">
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
@@ -204,9 +185,16 @@
       <screen x="0" y="23" width="2560" height="1342" />
     </state>
     <state x="758" y="331" key="SettingsEditor/0.23.2560.1342@0.23.2560.1342" timestamp="1606883871288" />
-    <state x="383" y="328" width="670" height="676" key="search.everywhere.popup" timestamp="1601002202930">
-      <screen x="0" y="23" width="2560" height="1342" />
-    </state>
-    <state x="383" y="328" width="670" height="676" key="search.everywhere.popup/0.23.2560.1342@0.23.2560.1342" timestamp="1601002202930" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tourGuide/controller/RewardsController.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
