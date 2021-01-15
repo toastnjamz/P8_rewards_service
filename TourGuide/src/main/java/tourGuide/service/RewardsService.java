@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rewardCentral.RewardCentral;
-import tourGuide.domain.ProviderListWrapper;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -23,7 +22,6 @@ public class RewardsService {
 		this.tripPricer = tripPricer;
 	}
 
-	//TODO: Add async solution? Use WebClient?
 	public int getRewardPoints(UUID attractionId, UUID userId) {
 		return rewardsCentral.getAttractionRewardPoints(attractionId, userId);
 	}

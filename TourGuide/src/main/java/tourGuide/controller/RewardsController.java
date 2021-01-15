@@ -1,6 +1,5 @@
 package tourGuide.controller;
 
-import com.jsoniter.output.JsonStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tourGuide.domain.ProviderListWrapper;
 import tourGuide.service.RewardsService;
-import tripPricer.Provider;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
