@@ -1,5 +1,6 @@
 package tourGuide.controller;
 
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,20 @@ import tourGuide.service.RewardsService;
 import java.util.UUID;
 
 @RestController
+@Api(description="Rewards microservice for TourGuide")
 public class RewardsController {
 
     @Autowired
     private RewardsService rewardsService;
     private final Logger logger = LoggerFactory.getLogger(RewardsController.class);
 
-    //TODO: Add async solution? Use WebClient?
+
+    /**
+     * Gets the user's current reward points
+     * @param attractionId
+     * @param userId
+     * @return int of reward points
+     */
     @RequestMapping("/reward-points")
     public Integer getRewardPoints(@RequestParam UUID attractionId, @RequestParam UUID userId) {
         logger.debug("Request made to getRewardPoints");
@@ -27,6 +35,16 @@ public class RewardsController {
         return rewardsPoints;
     }
 
+    /**
+     * Gets a list of a user's available trip deals
+     * @param tripPricerApiKey
+     * @param userId
+     * @param numberOfAdults
+     * @param numberOfChildren
+     * @param tripDuration
+     * @param cumulativeRewardPoints
+     * @return list of trip deals
+     */
     @RequestMapping("/trip-deals")
     public ProviderListWrapper getTripDeals(@RequestParam String tripPricerApiKey, @RequestParam UUID userId, @RequestParam int numberOfAdults,
                                             @RequestParam int numberOfChildren, @RequestParam int tripDuration,

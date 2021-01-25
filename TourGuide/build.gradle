@@ -14,13 +14,6 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "jacoco"
 
-
-//dependencyManagement {
-//    imports {
-//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:{spring-cloud-version}"
-//    }
-//}
-
 bootJar {
     baseName = 'tourGuide'
     version =  '1.0.0'
@@ -45,7 +38,8 @@ dependencies {
     compile(name:'RewardCentral', ext:'jar')
     compile(name:'TripPricer', ext:'jar')
 
-//    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '2.2.6.RELEASE'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 
     testCompile("junit:junit")
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.6.RELEASE'
