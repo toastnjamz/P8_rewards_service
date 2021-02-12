@@ -36,7 +36,6 @@ dependencies {
     compile group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
 
     compile(name:'RewardCentral', ext:'jar')
-    compile(name:'TripPricer', ext:'jar')
 
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'

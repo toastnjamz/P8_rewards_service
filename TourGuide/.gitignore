@@ -1,3 +1,5 @@
 TourGuide/.gradle/*
 TourGuide/.idea/*
 TourGuide/build/*
+
+*.hprof
